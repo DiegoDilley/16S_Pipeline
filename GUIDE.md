@@ -1,12 +1,9 @@
 # Amplicon Analysis in R: A Walkthrough
 
 This guide covers what happens to 16S/18S amplicon data after denoising, from a
-raw feature table through to publication figures. Each section explains what the
-step is for, what decision you're making, and what the code looks like.
+raw feature table through to publication figures.
 
-Nothing here is runnable against real data as written. The filenames and group
-names are placeholders. Read it as a reference for the shape of each step, then
-point the code at your own files.
+This is for refrence not runnable code.
 
 **Contents**
 
@@ -32,7 +29,7 @@ stored in a metadata column called `group`.
 ## 1. Where the data comes from
 
 R is not the start of this pipeline. Before any of it, you've run something like
-QIIME2 or DADA2 in a shell:
+QIIME2 or DADA2 in a shell (i didnt record my code for that so its not here) : 
 
 - imported and demultiplexed raw reads
 - trimmed and quality-filtered them
