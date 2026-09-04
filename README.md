@@ -36,5 +36,3 @@ remotes::install_github("cozygene/FEAST")
 remotes::install_github("ChiLiubio/microeco")
 remotes::install_github("pmartinezarbizu/pairwiseAdonis/pairwiseAdonis")
 ```
-
-Full list in [`R/00_dependencies.R`](R/00_dependencies.R).
