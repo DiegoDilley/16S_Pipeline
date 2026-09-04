@@ -28,8 +28,7 @@ stored in a metadata column called `group`.
 
 ## 1. Where the data comes from
 
-R is not the start of this pipeline. Before any of it, you've run something like
-QIIME2 or DADA2 in a shell (i didnt record my code for that so its not here) : 
+Prior to any R work raw sequencer data should be cleaned aka (Qimme2/DADA2/Deblur) (i didnt record my code for that so its not here) : 
 
 - imported and demultiplexed raw reads
 - trimmed and quality-filtered them
@@ -44,27 +43,18 @@ That produces three things, which are the entire input to everything below:
 | `taxonomy.tsv` | Each feature ID mapped to a semicolon-delimited lineage |
 | `metadata.tsv` | Each sample ID mapped to its group and any covariates |
 
-If your feature table came out of QIIME2 as a `.qza`, you export it to biom and
-then to TSV. Worth knowing: a `.qza` is just a zip file carrying its own
-provenance, so if you've lost the script that produced it, the parameters are
-still recoverable:
 
 ```bash
 unzip -o table.qza -d table_prov
 cat table_prov/*/provenance/action/action.yaml
 ```
 
-That file records the plugin, the action, and every parameter. It's the
-authoritative answer to "what trim length did I use", which is a question you
-will eventually be asked.
+That file records the plugin, the action, and every parameter. Keeps track of all changes done on original data.
 
 ---
 
 ## 2. Setting up
 
-Three of the packages used here don't come from CRAN, and a README that says
-"install the required packages" will fail for anyone who clones your repo. List
-the install lines explicitly.
 
 ```r
 # CRAN
@@ -83,22 +73,7 @@ remotes::install_github("pmartinezarbizu/pairwiseAdonis/pairwiseAdonis")
 FAPROTAX (section 11) isn't an R package at all. It's a Python script you
 download separately.
 
-Capture your environment once and commit the result. Two years later it answers
-"which version of vegan produced this number".
 
-```r
-writeLines(capture.output(sessionInfo()), "outputs/sessionInfo.txt")
-```
-
-And set a seed at the top of anything involving randomness: NMDS, permutation
-tests, rarefaction, and the EM algorithm in FEAST all give different answers
-between runs otherwise.
-
-```r
-set.seed(42)
-```
-
----
 
 ## 3. Building a phyloseq object
 
